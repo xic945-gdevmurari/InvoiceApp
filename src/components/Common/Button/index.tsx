@@ -11,40 +11,18 @@ import {
 import {hp, wp} from '../../../helpers/constants';
 import {colors, fontFamily} from '../../../helpers/utils';
 
-interface props{
-  title:string,
-  loading:boolean,
-  buttonStyle:object,
-  buttonTextStyle:object,
-  onPress:()=>void,
-  icon:any,
-  iconStyle:object,
-  disabled:boolean,
+interface props {
+  title?: string;
+  loading?: boolean;
+  buttonStyle?: object;
+  buttonTextStyle?: object;
+  onPress?: () => void;
+  icon?: any;
+  iconStyle?: object;
+  disabled?: boolean;
 }
 
-const styles = StyleSheet.create({
-  buttonStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: wp(89.33),
-    height: hp(7.14),
-  },
-  buttonTextStyle: {
-    textAlign: 'center',
-    fontSize: wp(4.8),
-    fontFamily: fontFamily.regular,
-    color: colors.primaryWhite,
-  },
-  iconStyle: {
-    height: wp(6),
-    width: wp(6),
-  },
-  buttonViewStyle: {
-    flexDirection: 'row',
-  },
-});
-
-const Button:React.FC<props> = ({
+const Button: React.FC<props> = ({
   title,
   loading,
   buttonStyle,
@@ -77,5 +55,27 @@ const Button:React.FC<props> = ({
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: wp(89.33),
+    height: hp(7.14),
+  },
+  buttonTextStyle: {
+    textAlign: 'center',
+    fontSize: wp(4.8),
+    fontFamily: fontFamily.regular,
+    color: colors.primaryWhite,
+  },
+  iconStyle: {
+    height: wp(6),
+    width: wp(6),
+  },
+  buttonViewStyle: {
+    flexDirection: 'row',
+  },
+});
 
 export default Button;

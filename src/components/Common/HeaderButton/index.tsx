@@ -1,7 +1,49 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import { wp } from '../../../helpers/constants';
-import { colors, fontFamily } from '../../../helpers/utils';
+
+import {wp} from '../../../helpers/constants';
+import {colors, fontFamily} from '../../../helpers/utils';
+
+interface props {
+  onPress?: () => void;
+  icon?: any;
+  text?: string;
+  imageStyle?: object;
+  containerStyle?: object;
+  headerButtomMainStyle?: object;
+  disabled?: boolean;
+  textStyle?: object;
+}
+
+const HeaderButton: React.FC<props> = ({
+  onPress,
+  icon,
+  text,
+  imageStyle,
+  containerStyle,
+  headerButtomMainStyle,
+  disabled,
+  textStyle,
+}) => (
+  <View style={headerButtomMainStyle}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      onPress={onPress}
+      style={[style.containerStyle, containerStyle]}
+      disabled={disabled}
+      hitSlop={style.hitSlopStyle}>
+      {icon ? (
+        <Image
+          source={icon}
+          style={[style.imageStyle, imageStyle]}
+          resizeMode={'contain'}
+        />
+      ) : (
+        <Text style={[style.textStyle, textStyle]}>{text}</Text>
+      )}
+    </TouchableOpacity>
+  </View>
+);
 
 const style = StyleSheet.create({
   headerButtomMainStyle: {
@@ -44,46 +86,5 @@ const style = StyleSheet.create({
     lineHeight: 17.46,
   },
 });
-
-interface props{
-   onPress:()=>void,
-  icon:any,
-  text:string,
-  imageStyle:object,
-  containerStyle:object,
-  headerButtomMainStyle:object,
-  disabled:boolean,
-  textStyle:object,
-}
-
-const HeaderButton:React.FC<props> = ({
-  onPress,
-  icon,
-  text,
-  imageStyle,
-  containerStyle,
-  headerButtomMainStyle,
-  disabled,
-  textStyle,
-}) => (
-  <View style={headerButtomMainStyle}>
-    <TouchableOpacity
-      activeOpacity={0.7}
-      onPress={onPress}
-      style={[style.containerStyle, containerStyle]}
-      disabled={disabled}
-      hitSlop={style.hitSlopStyle}>
-      {icon ? (
-        <Image
-          source={icon}
-          style={[style.imageStyle, imageStyle]}
-          resizeMode={'contain'}
-        />
-      ) : (
-        <Text style={[style.textStyle, textStyle]}>{text}</Text>
-      )}
-    </TouchableOpacity>
-  </View>
-);
 
 export default HeaderButton;

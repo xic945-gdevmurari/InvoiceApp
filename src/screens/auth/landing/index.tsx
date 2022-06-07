@@ -1,33 +1,31 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {CommonActions} from '@react-navigation/native';
+import {isEmpty} from 'lodash';
 
-import {asyncStorageKey, screenString} from '../../../helpers/strings';
+import {screenString} from '../../../helpers/strings';
+import {useSelector} from 'react-redux';
 
-interface props{
-  navigation:any
+interface props {
+  navigation: any;
 }
 
-const LandingScreen:React.FC<props> = ({navigation}) => {
+const LandingScreen: React.FC<props> = ({navigation}) => {
+  const {allUserData} = useSelector(state => state.auth);
+
   const getLoginData = async () => {
-    await AsyncStorage.getItem(asyncStorageKey.isLogin).then(value => {
-      if (value !== null) {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 1,
-            routes: [{name: screenString.mPinScreen}],
-          }),
-        );
-      } else {
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 1,
-            routes: [{name: screenString.registerScreen}],
-          }),
-        );
-      }
-    });
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          {
+            name: isEmpty(allUserData)
+              ? screenString.registerScreen
+              : screenString.mPinScreen,
+          },
+        ],
+      }),
+    );
   };
 
   useEffect(() => {

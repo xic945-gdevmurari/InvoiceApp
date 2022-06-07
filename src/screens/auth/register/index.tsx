@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, Keyboard, StyleSheet} from 'react-native';
+import {View, Text, Keyboard, StyleSheet} from 'react-native';
 
 import {Button} from '../../../components';
 import InputText from '../../../components/Common/TextInput';
@@ -8,11 +8,9 @@ import {icons} from '../../../helpers/iconConstant';
 import {screenString} from '../../../helpers/strings';
 import {colors, fontFamily} from '../../../helpers/utils';
 
-const RegisterScreen = ({navigation}: any) => {
+const RegisterScreen: React.FC = ({navigation}: any) => {
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [userNameError, setuserNameError] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<string>('');
   const [text, setText] = useState<boolean>(true);
 
   const onLoginPress = async () => {
@@ -74,12 +72,6 @@ const style = StyleSheet.create({
   containerStyle: {
     flex: 1,
     backgroundColor: colors.primaryWhite,
-  },
-  imageStyle: {
-    height: hp(24.54),
-    width: wp(45.33),
-    alignSelf: 'flex-end',
-    marginTop: hp(5.66),
   },
   errorTextStyle: {
     marginLeft: wp(1),

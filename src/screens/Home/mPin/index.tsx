@@ -1,60 +1,45 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {USER_DATA} from '../../../actions/types';
-import DeviceInfo from 'react-native-device-info';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
+import {isEmpty} from 'lodash';
 
-import {Button} from '../../../components';
 import {errorMessage, hp, isIos, wp} from '../../../helpers/constants';
 import {colors, fontFamily} from '../../../helpers/utils';
 import {CommonActions} from '@react-navigation/native';
 import {screenString} from '../../../helpers/strings';
+import {Button} from '../../../components';
 
 interface props {
-  route: object;
   navigation: any;
 }
 
-const SetMPINScreen: React.FC<props> = ({navigation, route}) => {
+const MPINScreen: React.FC<props> = ({navigation}) => {
+  const {allUserData} = useSelector((state: any) => state.auth);
+
   const [mpin, setMPIN] = useState<string>('');
-  const [confirmMPIN, setConfirmMPIN] = useState<string>('');
 
-  const {password, userName} = route?.params;
-
-  const dispatch = useDispatch();
-
-  const onSetMPIN = () => {
-    if (mpin?.trim()?.length === 0) {
-      errorMessage('MPIN', 'MPIN is required!');
-    } else if (confirmMPIN.trim()?.length === 0) {
-      errorMessage('Confirm MPIN', 'Confirm MPIN is required!');
-    } else if (mpin !== confirmMPIN) {
-      errorMessage('MPIN', 'MPIN and confirm MPIN not matched!');
-    } else {
-      let deviceId = DeviceInfo.getDeviceId();
-      let date = new Date().toLocaleString();
-      const obj = {
-        userName,
-        password,
-        deviceId,
-        mpin,
-        date,
-      };
-      dispatch({type: USER_DATA, payload: [obj]});
+  const onLoginPress = () => {
+    const isDataFound = allUserData?.filter((item: any) => item?.mpin == mpin);
+    if (mpin?.length === 0) {
+      errorMessage('MPIN is empty', 'Please enter MPIN!');
+    } else if (!isEmpty(isDataFound)) {
       navigation.dispatch(
         CommonActions.reset({
           index: 1,
-          routes: [{name: screenString.mPinScreen}],
+          routes: [{name: screenString.dashboardScreen}],
         }),
       );
+    } else {
+      errorMessage('Entered MPIN is incorrect', 'Please enter valid MPIN.');
     }
   };
+
   return (
     <View style={style.container}>
       <View style={style.subContainerStyle}>
-        <Text style={style.titleTextStyle}>{'Set Your MPIN'}</Text>
-        <Text style={style.pinTextStyle}>{'MPIN'}</Text>
+        <Text style={style.titleTextStyle}>{'MPIN Login'}</Text>
+        <Text style={style.pinTextStyle}>{'Please enter your MPIN'}</Text>
         <OTPInputView
           pinCount={4}
           autoFocusOnLoad
@@ -64,22 +49,12 @@ const SetMPINScreen: React.FC<props> = ({navigation, route}) => {
           codeInputHighlightStyle={style.underlineStyleHighLighted}
           style={style.otpInputContainer}
         />
-        <Text style={style.pinTextStyle}>{'Confirm MPIN'}</Text>
-        <OTPInputView
-          pinCount={4}
-          autoFocusOnLoad
-          secureTextEntry={true}
-          onCodeChanged={setConfirmMPIN}
-          codeInputFieldStyle={style.underlineStyleBase}
-          codeInputHighlightStyle={style.underlineStyleHighLighted}
-          style={style.otpInputContainer}
-        />
       </View>
       <Button
-        title={'Set MPIN'}
+        title={'Login'}
         buttonStyle={style.submitButtonStyle}
         buttonTextStyle={style.submitButtonTextStyle}
-        onPress={onSetMPIN}
+        onPress={onLoginPress}
       />
     </View>
   );
@@ -97,7 +72,7 @@ const style = StyleSheet.create({
   titleTextStyle: {
     textAlign: 'center',
     color: colors.commonColor,
-    fontSize: wp(6.66),
+    fontSize: wp(8.5),
     fontFamily: fontFamily.regular,
     fontWeight: '700',
   },
@@ -150,4 +125,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default SetMPINScreen;
+export default MPINScreen;
