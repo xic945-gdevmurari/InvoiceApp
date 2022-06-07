@@ -3,6 +3,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "RNSplashScreen.h"  // here
 
 #import <React/RCTAppSetupUtils.h>
 
@@ -13,6 +14,7 @@
 #import <React/RCTSurfacePresenter.h>
 #import <React/RCTSurfacePresenterBridgeAdapter.h>
 #import <ReactCommon/RCTTurboModuleManager.h>
+
 
 #import <react/config/ReactNativeConfig.h>
 
@@ -54,6 +56,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  [RNSplashScreen show];  // here
   return YES;
 }
 
