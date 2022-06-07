@@ -1,5 +1,7 @@
 import LandingScreen from './auth/landing';
-import LoginScreen from './auth/login';
-import SignUpScreen from './auth/signUp';
+import RegisterScreen from './auth/register';
+import SetMPINScreen from './auth/setMpin';
+import MPINScreen from './Home/mPin';
+import DashBoardScreen from './Home/dashBoard';
 
-export { LandingScreen, LoginScreen, SignUpScreen };
+export { LandingScreen, RegisterScreen, SetMPINScreen, MPINScreen, DashBoardScreen };

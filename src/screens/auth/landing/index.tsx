@@ -16,14 +16,14 @@ const LandingScreen:React.FC<props> = ({navigation}) => {
         navigation.dispatch(
           CommonActions.reset({
             index: 1,
-            routes: [{name: screenString.listingScreen}],
+            routes: [{name: screenString.mPinScreen}],
           }),
         );
       } else {
         navigation.dispatch(
           CommonActions.reset({
             index: 1,
-            routes: [{name: screenString.loginScreen}],
+            routes: [{name: screenString.registerScreen}],
           }),
         );
       }

@@ -4,10 +4,10 @@ export const strings = {
 
 export const screenString = {
   landing: 'Landing',
-  loginScreen: 'LoginScreen',
-  signUpScreen: 'SignUpScreen',
-  listingScreen: 'ListingScreen',
-  detailScreen: 'DetailScreen',
+  registerScreen:'RegisterScreen',
+  setMPINScreen:'SetMPINScreen',
+  mPinScreen:'MPINScreen',
+  dashboardScreen:'DashBoardScreen'
 };
 
 export const asyncStorageKey = {

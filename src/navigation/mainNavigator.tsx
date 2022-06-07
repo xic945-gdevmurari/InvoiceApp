@@ -3,9 +3,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {
+  DashBoardScreen,
   LandingScreen,
-  LoginScreen,
-  SignUpScreen,
+  MPINScreen,
+  RegisterScreen,
+  SetMPINScreen,
 } from '../screens';
 import {screenString} from '../helpers/strings';
 
@@ -21,10 +23,18 @@ const MainNavigator = () => {
         }}
         initialRouteName={screenString.landing}>
         <Stack.Screen name={screenString.landing} component={LandingScreen} />
-        <Stack.Screen name={screenString.loginScreen} component={LoginScreen} />
         <Stack.Screen
-          name={screenString.signUpScreen}
-          component={SignUpScreen}
+          name={screenString.registerScreen}
+          component={RegisterScreen}
+        />
+        <Stack.Screen
+          name={screenString.setMPINScreen}
+          component={SetMPINScreen}
+        />
+        <Stack.Screen name={screenString.mPinScreen} component={MPINScreen} />
+        <Stack.Screen
+          name={screenString.dashboardScreen}
+          component={DashBoardScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
