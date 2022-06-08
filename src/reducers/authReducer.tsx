@@ -20,8 +20,6 @@ export default (state = INITIAL_STATE, action: any) => {
         data: action?.payload,
       };
     case LANGUAGE:
-      console.log('action:-', action?.payload);
-
       return {
         ...state,
         language: action?.payload?.language,
