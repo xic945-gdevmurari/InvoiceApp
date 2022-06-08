@@ -21,7 +21,7 @@ interface props {
   leftIconContainerStyle?: object;
   rightIconContainerStyle?: object;
   rightIconStyle?: object;
-  badgeCount?: number;
+  badgeCount: number;
   children?: any;
   onRightIconPress?: () => void;
 }

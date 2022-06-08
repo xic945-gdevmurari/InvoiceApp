@@ -10,4 +10,6 @@ export const icons = {
   christian_faith: require('../../assets/icons/christian_faith.png'),
   down: require('../../assets/icons/down.png'),
   switch: require('../../assets/icons/switch.png'),
+  light: require('../../assets/icons/light.png'),
+  dark: require('../../assets/icons/dark.png'),
 };

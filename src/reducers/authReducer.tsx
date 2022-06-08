@@ -1,15 +1,21 @@
-import {USER_DATA} from '../actions/types';
+import {USER_DATA, USER_DUMMY_DATA} from '../actions/types';
 
 const INITIAL_STATE = {
-  allUserData: [],
+  allUserData: {},
+  data: [],
 };
 
-export default (state = INITIAL_STATE, action:any) => {
+export default (state = INITIAL_STATE, action: any) => {
   switch (action.type) {
     case USER_DATA:
       return {
         ...state,
-        allUserData: [...state.allUserData, ...action?.payload],
+        allUserData: action?.payload,
+      };
+    case USER_DUMMY_DATA:
+      return {
+        ...state,
+        data: action?.payload,
       };
     default:
       return state;

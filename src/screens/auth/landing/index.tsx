@@ -19,8 +19,10 @@ const LandingScreen: React.FC<props> = ({navigation}) => {
         index: 1,
         routes: [
           {
-            name: isEmpty(allUserData)
+            name: isEmpty(allUserData?.userName)
               ? screenString.registerScreen
+              : isEmpty(allUserData?.mpin)
+              ? screenString.setMPINScreen
               : screenString.mPinScreen,
           },
         ],

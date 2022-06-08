@@ -10,12 +10,28 @@ import {
   SetMPINScreen,
 } from '../screens';
 import {screenString} from '../helpers/strings';
+import {DARK_THEME, LIGHT_THEME} from '../helpers/utils';
+import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
+  const {isDarkTheme} = useSelector(state => state?.auth);
+
+  const DarkTheme = {
+    colors: {
+      ...DARK_THEME,
+    },
+  };
+
+  const lightTheme = {
+    colors: {
+      ...LIGHT_THEME,
+    },
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={isDarkTheme ? DarkTheme : lightTheme}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
@@ -30,8 +46,13 @@ const MainNavigator = () => {
         <Stack.Screen
           name={screenString.setMPINScreen}
           component={SetMPINScreen}
+          options={{gestureEnabled: false}}
         />
-        <Stack.Screen name={screenString.mPinScreen} component={MPINScreen} />
+        <Stack.Screen
+          name={screenString.mPinScreen}
+          component={MPINScreen}
+          options={{gestureEnabled: false}}
+        />
         <Stack.Screen
           name={screenString.dashboardScreen}
           component={DashBoardScreen}
