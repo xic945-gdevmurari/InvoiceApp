@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Keyboard, StyleSheet, SafeAreaView} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {USER_DATA} from '../../../actions/types';
+import {LANGUAGE, USER_DATA} from '../../../actions/types';
 import {useTheme} from '@react-navigation/native';
+import I18n from 'react-native-i18n';
 
 import {Button} from '../../../components';
 import CustomSwitch from '../../../components/Common/CustomSwitch';
@@ -11,14 +12,32 @@ import {errorMessage, hp, wp} from '../../../helpers/constants';
 import {icons} from '../../../helpers/iconConstant';
 import {screenString} from '../../../helpers/strings';
 import {fontFamily} from '../../../helpers/utils';
+import {getText} from '../../../helpers/globalFunction';
 
 const RegisterScreen: React.FC = ({navigation}: any) => {
+  const {allUserData, language, isLanguage} = useSelector(
+    (state: object) => state?.auth,
+  );
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [text, setText] = useState<boolean>(true);
   const [isSwitchOn, setIsSwitchOn] = useState<boolean>(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<boolean>(
+    I18n.locale !== 'en',
+  );
+  const [isChange, setIsChange] = useState<boolean>(false);
 
-  const {allUserData} = useSelector((state: object) => state?.auth);
+  useEffect(() => {
+    if (isChange === false) {
+      setIsChange(true);
+      setSelectedLanguage(!selectedLanguage);
+      dispatch({
+        type: LANGUAGE,
+        payload: !isLanguage ? 'en' : 'fr',
+      });
+      I18n.locale = language;
+    }
+  }, [selectedLanguage]);
 
   const {colors} = useTheme();
 
@@ -34,13 +53,25 @@ const RegisterScreen: React.FC = ({navigation}: any) => {
     setIsSwitchOn(!isSwitchOn);
   };
 
+  const onlaguageSwitch = () => {
+    setSelectedLanguage(!selectedLanguage);
+    dispatch({
+      type: LANGUAGE,
+      payload: {
+        isLanguage: selectedLanguage,
+        language: !isLanguage ? 'en' : 'fr',
+      },
+    });
+    I18n.locale = language;
+  };
+
   const onLoginPress = async () => {
     if (userName.trim().length === 0) {
-      errorMessage('UserName', 'Username is required!');
+      errorMessage(getText('userName'), getText('UsernameRequired'));
     } else if (password.trim().length === 0) {
-      errorMessage('Password', 'Password is required!');
+      errorMessage(getText('password'), getText('PasswordRequired'));
     } else if (password.trim().length < 4) {
-      errorMessage('Password', 'Password must required 4 digit!');
+      errorMessage(getText('password'), getText('PasswordMust4Digit'));
     } else {
       dispatch({
         type: USER_DATA,
@@ -59,7 +90,16 @@ const RegisterScreen: React.FC = ({navigation}: any) => {
           ? colors.primaryBlack
           : colors.primaryWhite,
       }}>
-      <SafeAreaView style={{alignSelf: 'flex-end'}}>
+      <SafeAreaView
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <CustomSwitch
+          language
+          value={selectedLanguage}
+          onTogglePress={onlaguageSwitch}
+        />
         <CustomSwitch
           value={allUserData?.isDarkTheme}
           onTogglePress={onToggleSwitch}
@@ -73,7 +113,7 @@ const RegisterScreen: React.FC = ({navigation}: any) => {
               ? colors.commonColor
               : colors.primaryWhite,
           }}>
-          {'Hello Again!'}
+          {getText('helloAgain')}
         </Text>
         <Text
           style={{
@@ -82,7 +122,7 @@ const RegisterScreen: React.FC = ({navigation}: any) => {
               ? colors.commonColor
               : colors.primaryWhite,
           }}>
-          {'Welcome back'}
+          {getText('welcomeBack')}
         </Text>
         <InputText
           containerStyle={{
@@ -91,7 +131,7 @@ const RegisterScreen: React.FC = ({navigation}: any) => {
           }}
           textInputStyle={{fontFamily: fontFamily.regular}}
           value={userName}
-          placeholder={'Username'}
+          placeholder={getText('userName')}
           placeholderTextColor={colors.shadowColor_6}
           onChangeText={setUserName}
         />
@@ -104,7 +144,7 @@ const RegisterScreen: React.FC = ({navigation}: any) => {
             },
           ]}
           value={password}
-          placeholder={'Password'}
+          placeholder={getText('password')}
           placeholderTextColor={colors.shadowColor_6}
           onChangeText={setPassword}
           secureTextEntry={text}
@@ -112,7 +152,7 @@ const RegisterScreen: React.FC = ({navigation}: any) => {
           onButtonPress={() => setText(!text)}
         />
         <Button
-          title={'Submit'}
+          title={getText('submit')}
           buttonStyle={style.submitButtonStyle}
           buttonTextStyle={style.submitButtonTextStyle}
           onPress={onLoginPress}

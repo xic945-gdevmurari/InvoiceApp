@@ -12,6 +12,7 @@ import {CommonActions, useTheme} from '@react-navigation/native';
 import {screenString} from '../../../helpers/strings';
 import moment from 'moment';
 import CustomSwitch from '../../../components/Common/CustomSwitch';
+import {getText} from '../../../helpers/globalFunction';
 
 interface props {
   navigation: any;
@@ -89,7 +90,7 @@ const SetMPINScreen: React.FC<props> = ({navigation}) => {
               ? colors.primaryWhite
               : colors.commonColor,
           }}>
-          {'Set Your MPIN'}
+          {getText('setYourMPIN')}
         </Text>
         <Text
           style={{
@@ -98,7 +99,7 @@ const SetMPINScreen: React.FC<props> = ({navigation}) => {
               ? colors.primaryWhite
               : colors.commonColor,
           }}>
-          {'MPIN'}
+          {getText('MPIN')}
         </Text>
         <OTPInputView
           pinCount={4}
@@ -126,7 +127,7 @@ const SetMPINScreen: React.FC<props> = ({navigation}) => {
               ? colors.primaryWhite
               : colors.commonColor,
           }}>
-          {'Confirm MPIN'}
+          {getText('confirmMPIN')}
         </Text>
         <OTPInputView
           pinCount={4}
@@ -149,7 +150,7 @@ const SetMPINScreen: React.FC<props> = ({navigation}) => {
         />
       </View>
       <Button
-        title={'Set MPIN'}
+        title={getText('setMPIN')}
         buttonStyle={style.submitButtonStyle}
         buttonTextStyle={style.submitButtonTextStyle}
         onPress={onSetMPIN}

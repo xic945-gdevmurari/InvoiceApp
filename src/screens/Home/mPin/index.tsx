@@ -11,6 +11,7 @@ import {Button} from '../../../components';
 import {USER_DATA} from '../../../actions/types';
 import moment from 'moment';
 import CustomSwitch from '../../../components/Common/CustomSwitch';
+import {getText} from '../../../helpers/globalFunction';
 
 interface props {
   navigation: any;
@@ -82,7 +83,7 @@ const MPINScreen: React.FC<props> = ({navigation}) => {
               ? colors.primaryWhite
               : colors.commonColor,
           }}>
-          {'MPIN Login'}
+          {getText('mpinLogin')}
         </Text>
         <Text
           style={{
@@ -91,7 +92,7 @@ const MPINScreen: React.FC<props> = ({navigation}) => {
               ? colors.primaryWhite
               : colors.commonColor,
           }}>
-          {'Enter your MPIN'}
+          {getText('enterYourMPIN')}
         </Text>
         <OTPInputView
           pinCount={4}
@@ -114,7 +115,7 @@ const MPINScreen: React.FC<props> = ({navigation}) => {
         />
       </View>
       <Button
-        title={'Login'}
+        title={getText('login')}
         buttonStyle={style.submitButtonStyle}
         buttonTextStyle={style.submitButtonTextStyle}
         onPress={onLoginPress}

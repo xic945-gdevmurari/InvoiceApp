@@ -4,14 +4,19 @@ import {CommonActions} from '@react-navigation/native';
 import {isEmpty} from 'lodash';
 
 import {screenString} from '../../../helpers/strings';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateLanguage} from '../../../actions/languageAction';
+import {LANGUAGE} from '../../../actions/types';
+import I18n from 'react-native-i18n';
 
 interface props {
   navigation: any;
 }
 
 const LandingScreen: React.FC<props> = ({navigation}) => {
-  const {allUserData} = useSelector(state => state.auth);
+  const {allUserData, isLanguage} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
 
   const getLoginData = async () => {
     navigation.dispatch(
@@ -31,6 +36,7 @@ const LandingScreen: React.FC<props> = ({navigation}) => {
   };
 
   useEffect(() => {
+    dispatch({type: LANGUAGE, payload: isLanguage ? 'fr' : 'en'});
     getLoginData();
   }, []);
 

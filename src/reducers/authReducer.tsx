@@ -1,8 +1,10 @@
-import {USER_DATA, USER_DUMMY_DATA} from '../actions/types';
+import {LANGUAGE, USER_DATA, USER_DUMMY_DATA} from '../actions/types';
 
 const INITIAL_STATE = {
   allUserData: {},
   data: [],
+  language: '',
+  isLanguage: false,
 };
 
 export default (state = INITIAL_STATE, action: any) => {
@@ -16,6 +18,14 @@ export default (state = INITIAL_STATE, action: any) => {
       return {
         ...state,
         data: action?.payload,
+      };
+    case LANGUAGE:
+      console.log('action:-', action?.payload);
+
+      return {
+        ...state,
+        language: action?.payload?.language,
+        isLanguage: action?.payload?.isLanguage,
       };
     default:
       return state;

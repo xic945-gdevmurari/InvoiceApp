@@ -1,0 +1,21 @@
+export default {
+  welcomeBack: 'Content de te revoir',
+  helloAgain: 'Rebonjour!',
+  userName: "Nom d'utilisateur",
+  password: 'Mot de passe',
+  submit: 'Soumettre',
+  setYourMPIN: 'Définissez votre NIP',
+  MPIN: 'NIMP',
+  confirmMPIN: 'Confirmer le NIP',
+  setMPIN: 'Définir le NIP',
+  mpinLogin: 'Connexion MPIN',
+  enterYourMPIN: 'Entrez votre NIP',
+  login: 'Connexion',
+  invoice: "Facture d'achat",
+  UsernameRequired: "Nom d'utilisateur est nécessaire!",
+  PasswordRequired: 'Mot de passe requis!',
+  PasswordMust4Digit:
+    'Le mot de passe doit obligatoirement comporter 4 chiffres !',
+  Welcome_Back: 'Content de te revoir',
+  lastLogin: 'Heure de la dernière connexion',
+};

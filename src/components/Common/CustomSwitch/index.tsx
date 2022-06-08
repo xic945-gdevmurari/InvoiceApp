@@ -7,10 +7,11 @@ import {hp, wp} from '../../../helpers/constants';
 
 interface props {
   value: boolean;
+  language?: boolean;
   onTogglePress: () => void;
 }
 
-const CustomSwitch: FC<props> = ({value, onTogglePress}) => {
+const CustomSwitch: FC<props> = ({value, language, onTogglePress}) => {
   const {colors} = useTheme();
   const styles = React.useMemo(() => getGlobalStyles({colors}), [colors]);
 
@@ -27,14 +28,22 @@ const CustomSwitch: FC<props> = ({value, onTogglePress}) => {
           <View style={styles.switchCricle}>
             {value ? (
               <Image
-                source={icons.dark}
-                style={{height: wp(5), width: wp(5), tintColor: 'white'}}
-                resizeMode={'contain'}
+                source={language ? icons.india : icons.dark}
+                style={{
+                  height: wp(5),
+                  width: wp(5),
+                  tintColor: language ? '' : 'white',
+                }}
+                resizeMode={'cover'}
               />
             ) : (
               <Image
-                source={icons.light}
-                style={{height: wp(5), width: wp(5), tintColor: 'yellow'}}
+                source={language ? icons.france : icons.light}
+                style={{
+                  height: wp(5),
+                  width: wp(5),
+                  tintColor: language ? '' : 'yellow',
+                }}
                 resizeMode={'contain'}
               />
             )}
@@ -50,7 +59,7 @@ const getGlobalStyles = (props: object) =>
     container: {
       flexDirection: 'row',
       marginTop: hp(1),
-      marginRight: wp(5.33),
+      marginHorizontal: wp(5.33),
     },
     switchCricle: {
       height: hp(3.0),

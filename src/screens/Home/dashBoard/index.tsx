@@ -18,6 +18,7 @@ import {screenString} from '../../../helpers/strings';
 import {fontFamily} from '../../../helpers/utils';
 import CustomSwitch from '../../../components/Common/CustomSwitch';
 import {USER_DATA, USER_DUMMY_DATA} from '../../../actions/types';
+import {getText} from '../../../helpers/globalFunction';
 
 const DashBoardScreen: FC = ({navigation}: any) => {
   const {allUserData, data} = useSelector((state: any) => state.auth);
@@ -85,7 +86,7 @@ const DashBoardScreen: FC = ({navigation}: any) => {
       <StatusBar barStyle={'light-content'} />
       <Header
         mainContainer={{...styles.headerContainerStyle}}
-        isTitle="Invoice"
+        isTitle={getText('invoice')}
         isRightView
         rightIcon={icons.switch}
         rightIconContainerStyle={{backgroundColor: 'white'}}
@@ -105,13 +106,12 @@ const DashBoardScreen: FC = ({navigation}: any) => {
         </View>
       </Header>
       <View style={styles.cardViewStyle}>
-        <Text
-          style={
-            styles.cardTitleTextStyle
-          }>{`Welcome Back ${allUserData?.userName} 👋`}</Text>
-        <Text style={styles.cardsubitleTextStyle}>{`Last Login Time ${moment(
-          allUserData?.date,
-        ).format('YYYY-MM-DD HH:mm:ss')}`}</Text>
+        <Text style={styles.cardTitleTextStyle}>{`${getText('Welcome_Back')} ${
+          allUserData?.userName
+        } 👋`}</Text>
+        <Text style={styles.cardsubitleTextStyle}>{`${getText(
+          'lastLogin',
+        )} ${moment(allUserData?.date).format('YYYY-MM-DD HH:mm:ss')}`}</Text>
       </View>
       {data?.length > 0 ? (
         <FlatList

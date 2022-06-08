@@ -12,4 +12,6 @@ export const icons = {
   switch: require('../../assets/icons/switch.png'),
   light: require('../../assets/icons/light.png'),
   dark: require('../../assets/icons/dark.png'),
+  india: require('../../assets/icons/india.png'),
+  france: require('../../assets/icons/france.png'),
 };
